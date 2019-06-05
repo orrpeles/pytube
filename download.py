@@ -5,5 +5,5 @@
 from pytube import YouTube
 yt = YouTube(str(input("Enter the link you wish to download: \n")))
 t = yt.streams.filter(only_audio=True).all()
-t[0].download('/home/op/Music')
+t[0].download('~/Music/')
 
