@@ -7,22 +7,18 @@
 from pytube import YouTube
 import os
 
-def progress_func(self, stream, chunk, file_handle, bytes_remaining):
-    size = video.filesize
-    p=0
-    while p<=100:
-        progress = p
-        print(str(p)+'%')
-        p = percent(bytes_remaining, size)
+# ask for input
+link = (str(input("Enter the link you wish to download: \n")))
 
-def percent(self, tem, total):
-    perc = (float(tem) / float(total)) * float(100)
-    return perc
+# define progress bar
+def progress_function(stream, chunk, file_handle, bytes_remaining):
+    print(round((1-bytes_remaining/tube.filesize)*100, 3), '% done...')
 
-dowLink = YouTube(str(input("Enter the link you wish to download: \n")))
-yt = YouTube(dowLink, on_progress_callback=progress_func)
-t = yt.streams.filter(only_audio=True).all()
+# define YouTube object
+yt = YouTube(link, on_progress_callback=progress_function)
+# specify stream
+tube = yt.streams.filter(progressive=True, file_extension='mp4').first()
+# define path and download file
 my_dir = os.path.expanduser('~/Music/')
-t[0].download(my_dir)
-
+tube.download(my_dir)
 
